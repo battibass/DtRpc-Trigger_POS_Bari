@@ -68,13 +68,13 @@ void combined_trigger_studies::Loop()
 					"Distance DT MB2 between segment and muon;#Deltax (cm);#Deltay (cm)", 
 					100, -50., 50., 100, -50., 50.);
 
-  // TH1F *h_dPhi_seg_TrigIn_MB1 = new TH1F("h_dPhi_seg_TrigIn_MB1", 
-  // 					 "Distance in MB1 between segment and TwinMux In;#Delta#phi (rad);# entires", 
-  // 					 100, 0., .5);
+  TH1F *h_dPhi_seg_TrigIn_MB1 = new TH1F("h_dPhi_seg_TrigIn_MB1", 
+					 "Distance in MB1 between segment and TwinMux In;#Delta#phi (rad);# entires", 
+					 100, 0., .5);
 
-  // TH1F *h_dPhi_seg_TrigIn_MB2 = new TH1F("h_dPhi_seg_TrigIn_MB2", 
-  // 					 "Distance in MB2 between segment and TwinMux In;#Delta#phi (rad);# entires", 
-  // 					 100, 0., .5);  
+  TH1F *h_dPhi_seg_TrigIn_MB2 = new TH1F("h_dPhi_seg_TrigIn_MB2", 
+					 "Distance in MB2 between segment and TwinMux In;#Delta#phi (rad);# entires", 
+					 100, 0., .5);  
 
   // TH1F *h_dX_MB1_layer_1 = new TH1F("h_dX_MB1_layer_1", "Distance on MB1 layer 1;#Deltax (cm); # entries", 100, 0, 10);
   // TH1F *h_dX_MB1_layer_2 = new TH1F("h_dX_MB1_layer_2", "Distance on MB1 layer 2;#Deltax (cm); # entries", 100, 0, 10);
@@ -89,20 +89,20 @@ void combined_trigger_studies::Loop()
 
   outputFile->cd("/efficiencies");
 
-  // TEfficiency* h_eff_twinmux_in_pt_MB1 = new TEfficiency("h_eff_twinmux_in_pt_MB1", 
-  // 							 "Efficiency vs p_{T};p_{T} (GeV/c);#epsilon", 20,0.,100.);
-  // TEfficiency* h_eff_twinmux_in_pt_MB2 = new TEfficiency("h_eff_twinmux_in_pt_MB2", 
-  // 							 "Efficiency vs p_{T};p_{T} (GeV/c);#epsilon", 20,0.,100.);    
+  TEfficiency* h_eff_twinmux_in_pt_MB1 = new TEfficiency("h_eff_twinmux_in_pt_MB1", 
+							 "Efficiency vs p_{T};p_{T} (GeV/c);#epsilon", 20,0.,100.);
+  TEfficiency* h_eff_twinmux_in_pt_MB2 = new TEfficiency("h_eff_twinmux_in_pt_MB2", 
+							 "Efficiency vs p_{T};p_{T} (GeV/c);#epsilon", 20,0.,100.);    
   
-  // TEfficiency* h_eff_twinmux_in_eta_MB1 = new TEfficiency("h_eff_twinmux_in_eta_MB1",
-  // 							  "Efficiency vs #eta;#eta;#epsilon", 24,-1.2,1.2);
-  // TEfficiency* h_eff_twinmux_in_eta_MB2 = new TEfficiency("h_eff_twinmux_in_eta_MB2",
-  // 							  "Efficiency vs #eta;#eta;#epsilon", 24,-1.2,1.2);
+  TEfficiency* h_eff_twinmux_in_eta_MB1 = new TEfficiency("h_eff_twinmux_in_eta_MB1",
+							  "Efficiency vs #eta;#eta;#epsilon", 24,-1.2,1.2);
+  TEfficiency* h_eff_twinmux_in_eta_MB2 = new TEfficiency("h_eff_twinmux_in_eta_MB2",
+							  "Efficiency vs #eta;#eta;#epsilon", 24,-1.2,1.2);
 
-  // TEfficiency* h_eff_twinmux_in_phi_MB1 = new TEfficiency("h_eff_twinmux_in_phi_MB1",
-  // 							  "Efficiency vs #phi;#phi (rad);#epsilon", 48,-pig,pig);
-  // TEfficiency* h_eff_twinmux_in_phi_MB2 = new TEfficiency("h_eff_twinmux_in_phi_MB2",
-  // 							  "Efficiency vs #phi;#phi (rad);#epsilon", 48,-pig,pig);
+  TEfficiency* h_eff_twinmux_in_phi_MB1 = new TEfficiency("h_eff_twinmux_in_phi_MB1",
+							  "Efficiency vs #phi;#phi (rad);#epsilon", 48,-pig,pig);
+  TEfficiency* h_eff_twinmux_in_phi_MB2 = new TEfficiency("h_eff_twinmux_in_phi_MB2",
+							  "Efficiency vs #phi;#phi (rad);#epsilon", 48,-pig,pig);
   
   // TEfficiency* h_eff_rpc_pt_MB1 = new TEfficiency("h_eff_rpc_pt_MB1", 
   // 						  "Efficiency vs p_{T};p_{T} (GeV/c);#epsilon", 20,0.,100.);
@@ -154,17 +154,15 @@ void combined_trigger_studies::Loop()
 
   outputFile->cd("/trigger");
 
-  // TH1F *h_BX_twinmux_in_MB1 = new TH1F("h_BX_twinmux_in_MB1", "TwinMux In BX for MB1; BX; # entries", 7, -3.5, 3.5);
-  // TH1F *h_BX_twinmux_in_MB2 = new TH1F("h_BX_twinmux_in_MB2", "TwinMux In BX for MB2; BX; # entries", 7, -3.5, 3.5);
+  TH1F *h_BX_twinmux_in_MB1 = new TH1F("h_BX_twinmux_in_MB1", "TwinMux In BX for MB1; BX; # entries", 7, -3.5, 3.5);
+  TH1F *h_BX_twinmux_in_MB2 = new TH1F("h_BX_twinmux_in_MB2", "TwinMux In BX for MB2; BX; # entries", 7, -3.5, 3.5);
 
   // TH1F *h_BX_twinmux_out_MB1 = new TH1F("h_BX_twinmux_out_MB1", "TwinMux Out BX for MB1; BX; # entries", 7, -3.5, 3.5);
   // TH1F *h_BX_twinmux_out_MB2 = new TH1F("h_BX_twinmux_out_MB2", "TwinMux Out BX for MB2; BX; # entries", 7, -3.5, 3.5);
 
-  // TH1F *h_qual_twinmux_in_MB1 = new TH1F("h_qual_twinmux_in_MB1", "TwinMux In quality for MB1; quality; # entries", 7, -0.5, 6.5);
-  // TH1F *h_qual_twinmux_in_MB2 = new TH1F("h_qual_twinmux_in_MB2", "TwinMux In quality for MB2; quality; # entries", 7, -0.5, 6.5);
+  TH1F *h_qual_twinmux_in_MB1 = new TH1F("h_qual_twinmux_in_MB1", "TwinMux In quality for MB1; quality; # entries", 7, -0.5, 6.5);
+  TH1F *h_qual_twinmux_in_MB2 = new TH1F("h_qual_twinmux_in_MB2", "TwinMux In quality for MB2; quality; # entries", 7, -0.5, 6.5);
  
-
-
   if (fChain == 0) return;
   
   Long64_t nentries = fChain->GetEntriesFast() < n_events ?
@@ -320,19 +318,50 @@ void combined_trigger_studies::Loop()
      
       std::vector<Int_t> twinmux_in_MB1;
       std::vector<Int_t> twinmux_in_MB2;
-      Float_t dphi_twinumx_in_seg_cut = 999.;
+      Float_t dphi_twinumx_in_seg_cut = 0.1;
 
       for(Int_t iTrig = 0; iTrig < NdtltTwinMuxIn; ++iTrig) {
 	
 	if(has_match_DT_MB1_muon) {
-
-	  // ...
 	  
+	  Int_t trigWh  = ltTwinMuxIn_wheel->at(iTrig);
+	  Int_t trigSt  = ltTwinMuxIn_station->at(iTrig);
+	  Int_t trigSec = ltTwinMuxIn_sector->at(iTrig);
+	  
+	  if(trigWh  == dtsegm4D_wheel->at(dtsegment_index[0])   &&
+	     trigSt  == dtsegm4D_station->at(dtsegment_index[0]) &&
+	     trigSec == dtsegm4D_sector->at(dtsegment_index[0]) ) {
+	    
+	    Float_t trigPhiGlb = PhiConversion(ltTwinMuxIn_phi->at(iTrig), trigSec);
+	    
+	    Float_t dPhi = acos(cos(dtsegm4D_phi->at(dtsegment_index[0]) - trigPhiGlb));
+	    
+	    h_dPhi_seg_TrigIn_MB1->Fill(dPhi);
+	    
+	    if(std::abs(dPhi) < dphi_twinumx_in_seg_cut)
+	      twinmux_in_MB1.push_back(iTrig);
+	  }
 	}
 	  
 	if(has_match_DT_MB2_muon) {
-
-	  // ...
+	    
+	  Int_t trigWh  = ltTwinMuxIn_wheel->at(iTrig);
+	  Int_t trigSt  = ltTwinMuxIn_station->at(iTrig);
+	  Int_t trigSec = ltTwinMuxIn_sector->at(iTrig);
+	  
+	  if(trigWh  == dtsegm4D_wheel->at(dtsegment_index[1])   &&
+	     trigSt  == dtsegm4D_station->at(dtsegment_index[1]) &&
+	     trigSec == dtsegm4D_sector->at(dtsegment_index[1]) ) {
+	    
+	    Float_t trigPhiGlb = PhiConversion(ltTwinMuxIn_phi->at(iTrig), trigSec);
+	    
+	    Float_t dPhi = acos(cos(dtsegm4D_phi->at(dtsegment_index[1]) - trigPhiGlb));
+	    
+	    h_dPhi_seg_TrigIn_MB2->Fill(dPhi);
+	    
+	    if(std::abs(dPhi) < dphi_twinumx_in_seg_cut)
+	      twinmux_in_MB2.push_back(iTrig);
+	  }
 	    
 	}
 
@@ -358,19 +387,43 @@ void combined_trigger_studies::Loop()
 
       for (const auto & iTrig : twinmux_in_MB1)
 	{
-
-	  // ...
 	  
+	  Int_t bx   = ltTwinMuxIn_bx->at(iTrig);
+	  Int_t qual = ltTwinMuxIn_quality->at(iTrig);
+
+	  if (bx == 0)
+	    has_twinmux_in_BX0_MB1 = true;
+
+	  h_BX_twinmux_in_MB1->Fill(bx);
+	  h_qual_twinmux_in_MB1->Fill(qual);
 	}	 
 
       for (const auto & iTrig : twinmux_in_MB2)
 	{
 	  
-	  // ...
+	  Int_t bx   = ltTwinMuxIn_bx->at(iTrig);
+	  Int_t qual = ltTwinMuxIn_quality->at(iTrig);
+	  
+	  if (bx == 0)
+	    has_twinmux_in_BX0_MB2 = true;
 
+	  h_BX_twinmux_in_MB2->Fill(bx);
+	  h_qual_twinmux_in_MB2->Fill(qual);
 	}	 
 
-      // ...
+      if (has_match_DT_MB1_muon)
+	{
+	  h_eff_twinmux_in_pt_MB1->Fill(has_twinmux_in_BX0_MB1,probe_vec.Pt());
+	  h_eff_twinmux_in_eta_MB1->Fill(has_twinmux_in_BX0_MB1,probe_vec.Eta());
+	  h_eff_twinmux_in_phi_MB1->Fill(has_twinmux_in_BX0_MB1,probe_vec.Phi());
+	}
+
+      if (has_match_DT_MB2_muon)
+	{
+	  h_eff_twinmux_in_pt_MB2->Fill(has_twinmux_in_BX0_MB2,probe_vec.Pt());
+	  h_eff_twinmux_in_eta_MB2->Fill(has_twinmux_in_BX0_MB2,probe_vec.Eta());
+	  h_eff_twinmux_in_phi_MB2->Fill(has_twinmux_in_BX0_MB2,probe_vec.Phi());
+	}
 
       // ************************************
       // We want to study RPC trigger 
@@ -454,7 +507,7 @@ void combined_trigger_studies::Loop()
       // ************************************      
       
       // RPC matching cuts
-      Float_t cluster_size_cut = 99.;
+      Float_t cluster_size_cut = 99.; // you need to tune it as part of the exercise
       Float_t range_strips = 4.;
 
       if (has_dt_extrapolation_MB1[0] && has_dt_extrapolation_MB1[1] ) {
@@ -481,7 +534,7 @@ void combined_trigger_studies::Loop()
 	
       std::vector<Int_t> twinmux_out_MB1;
       std::vector<Int_t> twinmux_out_MB2;
-      Float_t dphi_twinumx_out_seg_cut = 999.;
+      Float_t dphi_twinumx_out_seg_cut = 0.1;
 
       for(Int_t iTrig = 0; iTrig < NdtltTwinMuxOut; ++iTrig) {
 	
@@ -529,7 +582,6 @@ void combined_trigger_studies::Loop()
 
 }
 
-
 vector<std::pair<Int_t,Int_t>> combined_trigger_studies::TnPSelection(Float_t minMass,
 							 Float_t maxMass)
 {
@@ -574,14 +626,14 @@ vector<std::pair<Int_t,Int_t>> combined_trigger_studies::TnPSelection(Float_t mi
 	      bool probeQuality =
 		Mu_isMuTracker->at(iProbe) == 1 &&
 		Mu_isMuGlobal->at(iProbe)  == 1 &&
-		std::abs(Mu_dxy_glb->at(iProbe))  < Dxy_cut  &&
+		fabs(Mu_dxy_glb->at(iProbe)) < Dxy_cut &&
 		Mu_numberOfPixelHits_glb->at(iProbe)   >= npix_cut        &&
 		Mu_numberOfTrackerHits_glb->at(iProbe) >= ntkr_cut        &&
 		Mu_tkIsoR03_glb->at(iProbe) / probeVec.Pt() < tkr_iso_cut &&
 		std::abs(probeVec.Eta()) < max_eta_probe &&
 		probeVec.Pt() > min_pt_probe;
 
-	      if (probeQuality && std::abs(Mu_dz_glb->at(iTag) - Mu_dz_glb->at(iProbe)) < Dz_cut)
+	      if (probeQuality && std::abs(Mu_dz_glb->at(iTag) - Mu_dz_glb->at(iProbe)) < Dz_cut )
 		{
 		  Float_t mass = (tagVec + probeVec).M();
 

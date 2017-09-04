@@ -101,11 +101,65 @@ void plotter()
   
   TH2F *h_dX_dY_seg_muon_MB1 = (TH2F*)gDirectory->Get("/distance/h_dX_dY_seg_muon_MB1");
   TH2F *h_dX_dY_seg_muon_MB2 = (TH2F*)gDirectory->Get("/distance/h_dX_dY_seg_muon_MB2");
-    
-  // From efficiency folder  
   
-  // From trigger folder (TwinMux quality and BX)  
-    
+  TH1F *h_dPhi_seg_TrigIn_MB1 = (TH1F*)gDirectory->Get("/distance/h_dPhi_seg_TrigIn_MB1");
+  TH1F *h_dPhi_seg_TrigIn_MB2 = (TH1F*)gDirectory->Get("/distance/h_dPhi_seg_TrigIn_MB2");
+  
+  // TH1F *h_dX_MB1_layer_1 = (TH1F*)gDirectory->Get("/distance/h_dX_MB1_layer_1");
+  // TH1F *h_dX_MB1_layer_2 = (TH1F*)gDirectory->Get("/distance/h_dX_MB1_layer_2");
+  // TH1F *h_dX_MB2_layer_1 = (TH1F*)gDirectory->Get("/distance/h_dX_MB2_layer_1");
+  // TH1F *h_dX_MB2_layer_2 = (TH1F*)gDirectory->Get("/distance/h_dX_MB2_layer_2");
+  
+  // From efficiency folder
+  
+  TEfficiency *h_eff_twinmux_in_pt_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_in_pt_MB1");
+  TEfficiency *h_eff_twinmux_in_pt_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_in_pt_MB2");
+  
+  TEfficiency *h_eff_twinmux_in_eta_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_in_eta_MB1");
+  TEfficiency *h_eff_twinmux_in_eta_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_in_eta_MB2");
+  
+  TEfficiency *h_eff_twinmux_in_phi_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_in_phi_MB1");
+  TEfficiency *h_eff_twinmux_in_phi_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_in_phi_MB2");
+  
+  // TEfficiency *h_eff_rpc_pt_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_rpc_pt_MB1");
+  // TEfficiency *h_eff_rpc_pt_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_rpc_pt_MB2");
+  
+  // TEfficiency *h_eff_rpc_eta_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_rpc_eta_MB1");
+  // TEfficiency *h_eff_rpc_eta_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_rpc_eta_MB2");
+  
+  // TEfficiency *h_eff_rpc_phi_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_rpc_phi_MB1");
+  // TEfficiency *h_eff_rpc_phi_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_rpc_phi_MB2");
+
+  // TEfficiency *h_eff_combined_toy_pt_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_combined_toy_pt_MB1");
+  // TEfficiency *h_eff_combined_toy_pt_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_combined_toy_pt_MB2");
+  
+  // TEfficiency *h_eff_combined_toy_eta_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_combined_toy_eta_MB1");
+  // TEfficiency *h_eff_combined_toy_eta_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_combined_toy_eta_MB2");
+  
+  // TEfficiency *h_eff_combined_toy_phi_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_combined_toy_phi_MB1");
+  // TEfficiency *h_eff_combined_toy_phi_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_combined_toy_phi_MB2");
+  
+  TEfficiency *h_eff_twinmux_out_pt_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_out_pt_MB1");
+  TEfficiency *h_eff_twinmux_out_pt_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_out_pt_MB2");
+  
+  TEfficiency *h_eff_twinmux_out_eta_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_out_eta_MB1");
+  TEfficiency *h_eff_twinmux_out_eta_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_out_eta_MB2");
+  
+  TEfficiency *h_eff_twinmux_out_phi_MB1 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_out_phi_MB1");
+  TEfficiency *h_eff_twinmux_out_phi_MB2 = (TEfficiency*)gDirectory->Get("/efficiencies/h_eff_twinmux_out_phi_MB2");
+
+  // From trigger folder (TwinMux quality and BX)
+  
+  TH1F *h_BX_twinmux_in_MB1 = (TH1F*)gDirectory->Get("/trigger/h_BX_twinmux_in_MB1");
+  TH1F *h_BX_twinmux_in_MB2 = (TH1F*)gDirectory->Get("/trigger/h_BX_twinmux_in_MB2");
+  
+  TH1F *h_qual_twinmux_in_MB1 = (TH1F*)gDirectory->Get("/trigger/h_qual_twinmux_in_MB1");
+  TH1F *h_qual_twinmux_in_MB2 = (TH1F*)gDirectory->Get("/trigger/h_qual_twinmux_in_MB2");
+  
+  TH1F *h_BX_twinmux_out_MB1 = (TH1F*)gDirectory->Get("/trigger/h_BX_twinmux_out_MB1");
+  TH1F *h_BX_twinmux_out_MB2 = (TH1F*)gDirectory->Get("/trigger/h_BX_twinmux_out_MB2");
+  
+  
   /////////////////////////
   ////  Now plot the  /////
   //// the histograms /////
@@ -139,4 +193,47 @@ void plotter()
   dR_seg_muon->SetLogy();
   dR_seg_muon->Update();
 
-  }
+  TCanvas * dPhi_seg_TrigIn = compareHistos("#Delta#phi DT segment - TwinMux In", h_dPhi_seg_TrigIn_MB1, h_dPhi_seg_TrigIn_MB2, "MB1", "MB2");
+  dPhi_seg_TrigIn->SetLogy();
+  dPhi_seg_TrigIn->Update();
+
+  // TCanvas *dX_MB1_layer_1 = new TCanvas("#DeltaX extrapolation - recHit: MB1, layer 1", "#DeltaX extrapolation - recHit: MB1, layer 1", 210,45,750,500);
+  // h_dX_MB1_layer_1->Draw();
+  // TCanvas *dX_MB1_layer_2 = new TCanvas("#DeltaX extrapolation - recHit: MB1, layer 2", "#DeltaX extrapolation - recHit: MB1, layer 2", 210,45,750,500);
+  // h_dX_MB1_layer_2->Draw();
+  // TCanvas *dX_MB2_layer_1 = new TCanvas("#DeltaX extrapolation - recHit: MB2, layer 1", "#DeltaX extrapolation - recHit: MB2, layer 1", 210,45,750,500);
+  // h_dX_MB2_layer_1->Draw();
+  // TCanvas *dX_MB2_layer_2 = new TCanvas("#DeltaX extrapolation - recHit: MB2, layer 2", "#DeltaX extrapolation - recHit: MB2, layer 2", 210,45,750,500);
+  // h_dX_MB2_layer_2->Draw();
+    
+  // compareEfficiencies("RPC eff vs p_{T}", h_eff_rpc_pt_MB1, h_eff_rpc_pt_MB2, "MB1", "MB2");    
+  // compareEfficiencies("RPC eff vs #eta", h_eff_rpc_eta_MB1, h_eff_rpc_eta_MB2, "MB1", "MB2");    
+  // compareEfficiencies("RPC eff vs #phi", h_eff_rpc_phi_MB1, h_eff_rpc_phi_MB2, "MB1", "MB2");    
+
+  compareEfficiencies("TwinMux In eff vs p_{T}", h_eff_twinmux_in_pt_MB1, h_eff_twinmux_in_pt_MB2, "MB1", "MB2");    
+  compareEfficiencies("TwinMux In eff vs #eta", h_eff_twinmux_in_eta_MB1, h_eff_twinmux_in_eta_MB2, "MB1", "MB2");    
+  compareEfficiencies("TwinMux In eff vs #phi", h_eff_twinmux_in_phi_MB1, h_eff_twinmux_in_phi_MB2, "MB1", "MB2");    
+
+  // compareEfficiencies("Toy Eff vs p_{T} MB1", (TEfficiency*) h_eff_twinmux_in_pt_MB1->Clone(), h_eff_combined_toy_pt_MB1, "TwinMux In", "Toy");    
+  // compareEfficiencies("Toy Eff vs #eta MB1", (TEfficiency*) h_eff_twinmux_in_eta_MB1->Clone(), h_eff_combined_toy_eta_MB1, "TwinMux In", "Toy");    
+  // compareEfficiencies("Toy Eff vs #phi MB1", (TEfficiency*) h_eff_twinmux_in_phi_MB1->Clone(), h_eff_combined_toy_phi_MB1, "TwinMux In", "Toy");    
+
+  // compareEfficiencies("Toy Eff vs p_{T} MB2", (TEfficiency*) h_eff_twinmux_in_pt_MB2->Clone(), h_eff_combined_toy_pt_MB2, "TwinMux In", "Toy");    
+  // compareEfficiencies("Toy Eff vs #eta MB2", (TEfficiency*) h_eff_twinmux_in_eta_MB2->Clone(), h_eff_combined_toy_eta_MB2, "TwinMux In", "Toy");    
+  // compareEfficiencies("Toy Eff vs #phi MB2", (TEfficiency*) h_eff_twinmux_in_phi_MB2->Clone(), h_eff_combined_toy_phi_MB2, "TwinMux In", "Toy");    
+
+  // compareEfficiencies("Eff vs p_{T} MB1 In/Out", (TEfficiency*) h_eff_twinmux_in_pt_MB1->Clone(), h_eff_twinmux_out_pt_MB1, "TwinMux In", "TwinMux + RPC");    
+  // compareEfficiencies("Eff vs #eta MB1 In/Out", (TEfficiency*) h_eff_twinmux_in_eta_MB1->Clone(), h_eff_twinmux_out_eta_MB1, "TwinMux In", "TwinMux + RPC");    
+  // compareEfficiencies("Eff vs #phi MB1 In/Out", (TEfficiency*) h_eff_twinmux_in_phi_MB1->Clone(), h_eff_twinmux_out_phi_MB1, "TwinMux In", "TwinMux + RPC");    
+
+  // compareEfficiencies("Eff vs p_{T} MB2 In/Out", (TEfficiency*) h_eff_twinmux_in_pt_MB2->Clone(), h_eff_twinmux_out_pt_MB2, "TwinMux In", "TwinMux + RPC");    
+  // compareEfficiencies("Eff vs #eta MB2 In/Out", (TEfficiency*) h_eff_twinmux_in_eta_MB2->Clone(), h_eff_twinmux_out_eta_MB2, "TwinMux In", "TwinMux + RPC");    
+  // compareEfficiencies("Eff vs #phi MB2 In/Out", (TEfficiency*) h_eff_twinmux_in_phi_MB2->Clone(), h_eff_twinmux_out_phi_MB2, "TwinMux In", "TwinMux + RPC");    
+  
+  // compareHistos("TwinMux In/Out BX MB1", h_BX_twinmux_in_MB1, h_BX_twinmux_out_MB1, "TwinMux In", "TwinMux Out");
+  // compareHistos("TwinMux In/Out BX MB2", h_BX_twinmux_in_MB2, h_BX_twinmux_out_MB2, "TwinMux In", "TwinMux Out");
+  
+  // compareHistos("TwinMux In Quality", h_qual_twinmux_in_MB1, h_qual_twinmux_in_MB2, "MB1", "MB2");
+  // compareHistos("TwinMux In BX", h_BX_twinmux_in_MB1->Clone(), h_BX_twinmux_in_MB2->Clone(), "MB1", "MB2");
+
+}
