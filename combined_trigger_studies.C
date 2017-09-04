@@ -52,21 +52,21 @@ void combined_trigger_studies::Loop()
 
   outputFile->cd("/distance");
 
-  // TH1F *h_dR_seg_muon_MB1 = new TH1F("h_dR_seg_muon_MB1", 
-  // 				     "Distance in MB1 between segment and muon;#DeltaR (cm);# entires", 
-  // 				     50, 0., 50.);
+  TH1F *h_dR_seg_muon_MB1 = new TH1F("h_dR_seg_muon_MB1", 
+				     "Distance in MB1 between segment and muon;#DeltaR (cm);# entires", 
+				     50, 0., 50.);
 
-  // TH1F *h_dR_seg_muon_MB2 = new TH1F("h_dR_seg_muon_MB2", 
-  // 				     "Distance in MB1 between segment and muon;#DeltaR (cm);# entires", 
-  // 				     50, 0., 50.);
+  TH1F *h_dR_seg_muon_MB2 = new TH1F("h_dR_seg_muon_MB2", 
+				     "Distance in MB1 between segment and muon;#DeltaR (cm);# entires", 
+				     50, 0., 50.);
 
-  // TH2F *h_dX_dY_seg_muon_MB1 = new TH2F("h_dX_dY_seg_muon_MB1", 
-  // 					"Distance in MB1 between segment and muon;#Deltax (cm);#Deltay (cm)", 
-  // 					100, -50., 50., 100, -50., 50.);
+  TH2F *h_dX_dY_seg_muon_MB1 = new TH2F("h_dX_dY_seg_muon_MB1", 
+					"Distance in MB1 between segment and muon;#Deltax (cm);#Deltay (cm)", 
+					100, -50., 50., 100, -50., 50.);
 
-  // TH2F *h_dX_dY_seg_muon_MB2 = new TH2F("h_dX_dY_seg_muon_MB2", 
-  // 					"Distance DT MB2 between segment and muon;#Deltax (cm);#Deltay (cm)", 
-  // 					100, -50., 50., 100, -50., 50.);
+  TH2F *h_dX_dY_seg_muon_MB2 = new TH2F("h_dX_dY_seg_muon_MB2", 
+					"Distance DT MB2 between segment and muon;#Deltax (cm);#Deltay (cm)", 
+					100, -50., 50., 100, -50., 50.);
 
   // TH1F *h_dPhi_seg_TrigIn_MB1 = new TH1F("h_dPhi_seg_TrigIn_MB1", 
   // 					 "Distance in MB1 between segment and TwinMux In;#Delta#phi (rad);# entires", 
@@ -150,7 +150,7 @@ void combined_trigger_studies::Loop()
   // 							  "Efficiency vs #phi;#phi (rad);#epsilon", 48,-pig,pig);
 
 
-  // TwinMux quality and BX
+  // Twin MuX quality and BX
 
   outputFile->cd("/trigger");
 
@@ -236,7 +236,7 @@ void combined_trigger_studies::Loop()
       bool has_match_DT_MB2_muon = false;
       Int_t dtsegment_index[2] = {-999, -999};
 
-      Float_t dr_seg_muon_cut = 999.; // parameter to be tuned as part of the exercise
+      Float_t dr_seg_muon_cut = 10.;
 
       Float_t minDrMB1 = 999.;
       Float_t minDrMB2 = 999.;      
@@ -256,11 +256,17 @@ void combined_trigger_studies::Loop()
 	   dtsegm4D_sector->at(iDtSegm) == Mu_sector_MB1->at(iProbe) &&
 	   dtsegm4D_wheel->at(iDtSegm)  == Mu_wheel_MB1->at(iProbe)  ) {
 
-	  // ...
-
-	  // h_dX_dY_seg_muon_MB1->Fill(dXMB1,dYMB1);
-
-	  // ...
+	  Float_t dXMB1 = (Mu_x_MB1->at(iProbe) - dtsegm4D_x_pos_loc->at(iDtSegm));
+	  Float_t dYMB1 = (Mu_y_MB1->at(iProbe) - dtsegm4D_y_pos_loc->at(iDtSegm));
+	  
+	  Float_t dRMB1 = sqrt(dXMB1*dXMB1 + dYMB1*dYMB1);
+	  
+	  h_dX_dY_seg_muon_MB1->Fill(dXMB1,dYMB1);
+	  
+	  if(dRMB1 < minDrMB1) {
+	    dtsegment_index[0] = iDtSegm;
+	    minDrMB1 = dRMB1; 
+	  }
 	  
 	}
 	
@@ -271,16 +277,33 @@ void combined_trigger_studies::Loop()
 	   dtsegm4D_sector->at(iDtSegm) == Mu_sector_MB2->at(iProbe) &&
 	   dtsegm4D_wheel->at(iDtSegm)  == Mu_wheel_MB2->at(iProbe)  ) {
 	  
-	  // ...
+	  Float_t dXMB2 = (Mu_x_MB2->at(iProbe) - dtsegm4D_x_pos_loc->at(iDtSegm));
+	  Float_t dYMB2 = (Mu_y_MB2->at(iProbe) - dtsegm4D_y_pos_loc->at(iDtSegm));
+	    
+	  Float_t dRMB2 = sqrt(dXMB2*dXMB2 + dYMB2*dYMB2);
 	  
-	  // h_dX_dY_seg_muon_MB2->Fill(dXMB2,dYMB2);
+	  h_dX_dY_seg_muon_MB2->Fill(dXMB2,dYMB2);
 	  
+	  if(dRMB2 < minDrMB2) {  
+	    dtsegment_index[1] = iDtSegm;
+	    minDrMB2 = dRMB2; 
+	  }
 	  
 	}
 	
       }
 
-      // ...
+      if(minDrMB1 < 900.) 
+	h_dR_seg_muon_MB1->Fill(minDrMB1);
+
+      if(minDrMB2 < 900.)
+	h_dR_seg_muon_MB2->Fill(minDrMB2);
+
+      if(minDrMB1 < dr_seg_muon_cut )
+	has_match_DT_MB1_muon = true;
+
+      if(minDrMB2 < dr_seg_muon_cut)
+	has_match_DT_MB2_muon = true;
 
       // ************************************
       // We want to look for *all* DT trigger
@@ -297,7 +320,7 @@ void combined_trigger_studies::Loop()
      
       std::vector<Int_t> twinmux_in_MB1;
       std::vector<Int_t> twinmux_in_MB2;
-      Float_t dphi_twinumx_in_seg_cut = 999.; // parameter to be tuned as part of the exercise
+      Float_t dphi_twinumx_in_seg_cut = 999.;
 
       for(Int_t iTrig = 0; iTrig < NdtltTwinMuxIn; ++iTrig) {
 	
@@ -431,7 +454,7 @@ void combined_trigger_studies::Loop()
       // ************************************      
       
       // RPC matching cuts
-      Float_t cluster_size_cut = 99.; // parameter to be tuned as part of the exercise
+      Float_t cluster_size_cut = 99.;
       Float_t range_strips = 4.;
 
       if (has_dt_extrapolation_MB1[0] && has_dt_extrapolation_MB1[1] ) {
@@ -458,7 +481,7 @@ void combined_trigger_studies::Loop()
 	
       std::vector<Int_t> twinmux_out_MB1;
       std::vector<Int_t> twinmux_out_MB2;
-      Float_t dphi_twinumx_out_seg_cut = 999.; // parameter to be tuned as part of the exercise
+      Float_t dphi_twinumx_out_seg_cut = 999.;
 
       for(Int_t iTrig = 0; iTrig < NdtltTwinMuxOut; ++iTrig) {
 	
@@ -508,7 +531,7 @@ void combined_trigger_studies::Loop()
 
 
 vector<std::pair<Int_t,Int_t>> combined_trigger_studies::TnPSelection(Float_t minMass,
-								      Float_t maxMass) const
+							 Float_t maxMass)
 {
 
   vector<std::pair<Int_t,Int_t>> pairs;
@@ -551,7 +574,7 @@ vector<std::pair<Int_t,Int_t>> combined_trigger_studies::TnPSelection(Float_t mi
 	      bool probeQuality =
 		Mu_isMuTracker->at(iProbe) == 1 &&
 		Mu_isMuGlobal->at(iProbe)  == 1 &&
-		std::abs(Mu_dz_glb->at(iProbe))  < Dz_cut  &&
+		std::abs(Mu_dxy_glb->at(iProbe))  < Dxy_cut  &&
 		Mu_numberOfPixelHits_glb->at(iProbe)   >= npix_cut        &&
 		Mu_numberOfTrackerHits_glb->at(iProbe) >= ntkr_cut        &&
 		Mu_tkIsoR03_glb->at(iProbe) / probeVec.Pt() < tkr_iso_cut &&
@@ -577,8 +600,7 @@ vector<std::pair<Int_t,Int_t>> combined_trigger_studies::TnPSelection(Float_t mi
 }
 
 bool combined_trigger_studies::HasTrigger(const TLorentzVector & muon,
-					  Float_t deltaR) const 
-{
+			     Float_t deltaR) {
 
   for(Int_t iTrig = 0; iTrig < NhltFilters; ++iTrig)
     {
@@ -600,7 +622,7 @@ bool combined_trigger_studies::HasTrigger(const TLorentzVector & muon,
   
 }
 
-Float_t combined_trigger_studies::PhiConversion(Int_t phi_In, Int_t sector) const
+Float_t combined_trigger_studies::PhiConversion(Int_t phi_In, Int_t sector)
 {	
   Float_t locphi = phi_In / 4096.0;
   Float_t newphi = locphi + ((sector-1) * (pig/6.));

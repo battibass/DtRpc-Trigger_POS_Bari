@@ -95,7 +95,13 @@ void plotter()
   TH1F *h_mu_pt = (TH1F*)gDirectory->Get("/kinematics/h_mu_pt");
   
   // From distance folder (matchings etc ...)
-      
+  
+  TH1F *h_dR_seg_muon_MB1 = (TH1F*)gDirectory->Get("/distance/h_dR_seg_muon_MB1");
+  TH1F *h_dR_seg_muon_MB2 = (TH1F*)gDirectory->Get("/distance/h_dR_seg_muon_MB2");
+  
+  TH2F *h_dX_dY_seg_muon_MB1 = (TH2F*)gDirectory->Get("/distance/h_dX_dY_seg_muon_MB1");
+  TH2F *h_dX_dY_seg_muon_MB2 = (TH2F*)gDirectory->Get("/distance/h_dX_dY_seg_muon_MB2");
+    
   // From efficiency folder  
   
   // From trigger folder (TwinMux quality and BX)  
@@ -122,5 +128,15 @@ void plotter()
   h_mu_phi->SetMinimum(0.);	
   h_mu_phi->Draw();	
 
+  TCanvas *dX_dY_seg_muon_MB1 = new TCanvas("#DeltaX vs #DeltaY: MB1", "#DeltaX vs #DeltaY: MB1", 500 ,500);
+  dX_dY_seg_muon_MB1->SetLogz();
+  h_dX_dY_seg_muon_MB1->Draw("colz");
+  TCanvas *dX_dY_seg_muon_MB2 = new TCanvas("#DeltaX vs #DeltaY: MB2", "#DeltaX vs #DeltaY: MB2", 500,500);
+  dX_dY_seg_muon_MB2->SetLogz();
+  h_dX_dY_seg_muon_MB2->Draw("colz");
 
-}
+  TCanvas * dR_seg_muon  = compareHistos("Distance muon - DT segment", h_dR_seg_muon_MB1, h_dR_seg_muon_MB2, "MB1", "MB2");
+  dR_seg_muon->SetLogy();
+  dR_seg_muon->Update();
+
+  }

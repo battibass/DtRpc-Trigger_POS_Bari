@@ -2,6 +2,7 @@
 // This class has been automatically generated on
 // Tue May 16 10:08:45 2017 by ROOT version 6.08/02
 // from TTree DTTree/CMSSW DT tree
+// found on file: /afs/cern.ch/work/f/ferrico/private/DT_update/CMSSW_9_0_0_pre4/src/UserCode/DTDPGAnalysis/test/DTNtuple.root
 //////////////////////////////////////////////////////////
 
 #ifndef combined_trigger_studies_h
@@ -35,12 +36,12 @@ class combined_trigger_studies {
   TString input_file_name  = "/home/common/ShortExercises/RPC_DT_GEANT/DTNtuple_v2.root";
   TString output_file_name = "analysis_results.root";
 
-  Long64_t n_events = 500000;
+  Long64_t n_events = 250000;
 
   // Trigger and RECO muon cuts   	
 
-  Float_t min_TnP_mass = 50;
-  Float_t max_TnP_mass = 200;
+  Float_t min_TnP_mass = 81;
+  Float_t max_TnP_mass = 101;
 
   Float_t Dz_cut =  1.0;
 
@@ -404,9 +405,9 @@ class combined_trigger_studies {
 
    template<typename T> T getXY(TClonesArray * arr, int x, int y) { return static_cast<T>((*((TVectorT<float> *)(arr->At(x))))[y]); };
     
-   float PhiConversion(int, int) const;
-   std::vector<std::pair<int,int>> TnPSelection(Float_t, Float_t) const;
-   bool HasTrigger(const TLorentzVector &, Float_t) const;
+   float PhiConversion(int, int);
+   std::vector<std::pair<int,int>> TnPSelection(Float_t, Float_t);
+   bool HasTrigger(const TLorentzVector &, Float_t);
 
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
