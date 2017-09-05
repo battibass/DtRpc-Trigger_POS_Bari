@@ -76,11 +76,11 @@ void combined_trigger_studies::Loop()
 					 "Distance in MB2 between segment and TwinMux In;#Delta#phi (rad);# entires", 
 					 100, 0., .5);  
 
-  // TH1F *h_dX_MB1_layer_1 = new TH1F("h_dX_MB1_layer_1", "Distance on MB1 layer 1;#Deltax (cm); # entries", 100, 0, 10);
-  // TH1F *h_dX_MB1_layer_2 = new TH1F("h_dX_MB1_layer_2", "Distance on MB1 layer 2;#Deltax (cm); # entries", 100, 0, 10);
+  TH1F *h_dX_MB1_layer_1 = new TH1F("h_dX_MB1_layer_1", "Distance on MB1 layer 1;#Deltax (cm); # entries", 100, 0, 10);
+  TH1F *h_dX_MB1_layer_2 = new TH1F("h_dX_MB1_layer_2", "Distance on MB1 layer 2;#Deltax (cm); # entries", 100, 0, 10);
   
-  // TH1F *h_dX_MB2_layer_1 = new TH1F("h_dX_MB2_layer_1", "Distance on MB2 layer 1;#Deltax (cm); # entries", 100, 0, 10);
-  // TH1F *h_dX_MB2_layer_2 = new TH1F("h_dX_MB2_layer_2", "Distance on MB2 layer 2;#Deltax (cm); # entires", 100, 0, 10);
+  TH1F *h_dX_MB2_layer_1 = new TH1F("h_dX_MB2_layer_1", "Distance on MB2 layer 1;#Deltax (cm); # entries", 100, 0, 10);
+  TH1F *h_dX_MB2_layer_2 = new TH1F("h_dX_MB2_layer_2", "Distance on MB2 layer 2;#Deltax (cm); # entires", 100, 0, 10);
 
   
 
@@ -163,6 +163,8 @@ void combined_trigger_studies::Loop()
   TH1F *h_qual_twinmux_in_MB1 = new TH1F("h_qual_twinmux_in_MB1", "TwinMux In quality for MB1; quality; # entries", 7, -0.5, 6.5);
   TH1F *h_qual_twinmux_in_MB2 = new TH1F("h_qual_twinmux_in_MB2", "TwinMux In quality for MB2; quality; # entries", 7, -0.5, 6.5);
  
+
+
   if (fChain == 0) return;
   
   Long64_t nentries = fChain->GetEntriesFast() < n_events ?
@@ -465,14 +467,54 @@ void combined_trigger_studies::Loop()
 
 	  if(getXY<int>(DTextrapolatedOnRPCLayer,dtsegment_index[0],iOnRpc) == 1) { // inner ring
 	    
-	    // ...
+	    has_dt_extrapolation_MB1[0] = true;
+	    
+	    stripWidthMB1[0] = getXY<float>(DTextrapolatedOnRPCStripw,dtsegment_index[0],iOnRpc);
+	    
+	    for(int iRpc = 0; iRpc < NirpcrechitsTwinMux; ++iRpc) {
 	      
+	      if((RpcRecHitTwinMuxStation->at(iRpc) == getXY<int>(DTextrapolatedOnRPCStation,dtsegment_index[0],iOnRpc)) &&
+		 (RpcRecHitTwinMuxSector->at(iRpc)  == getXY<int>(DTextrapolatedOnRPCSector,dtsegment_index[0],iOnRpc))  &&
+		 (RpcRecHitTwinMuxRing->at(iRpc)    == getXY<int>(DTextrapolatedOnRPCRing,dtsegment_index[0],iOnRpc))    &&
+		 (RpcRecHitTwinMuxLayer->at(iRpc)   == getXY<int>(DTextrapolatedOnRPCLayer,dtsegment_index[0],iOnRpc)) ) {
+		
+		Float_t dXInner  = abs(getXY<float>(DTextrapolatedOnRPCLocX,dtsegment_index[0],iOnRpc) - RpcRechitTwinMuxLocX->at(iRpc));
+		
+		if(dXInner < minDxMB1[0]) {
+		  minDxMB1[0] = dXInner;
+		  rpcCluSizeMB1[0] = RpcRecHitTwinMuxClusterSize->at(iRpc);
+		}
+	      }
+	    }
+	    
+	    h_dX_MB1_layer_1->Fill(minDxMB1[0]);
+	    
 	  }
 	  
 	  if(getXY<int>(DTextrapolatedOnRPCLayer,dtsegment_index[0],iOnRpc) == 2) { // outer ring
 	    
-	    // ...
+	    has_dt_extrapolation_MB1[1] = true;
+	    
+	    stripWidthMB1[1] = getXY<float>(DTextrapolatedOnRPCStripw,dtsegment_index[0],iOnRpc);
+	    
+	    for(int iRpc = 0; iRpc < NirpcrechitsTwinMux; ++iRpc) {
 	      
+	      if((RpcRecHitTwinMuxStation->at(iRpc) == getXY<int>(DTextrapolatedOnRPCStation,dtsegment_index[0],iOnRpc)) &&
+	   	 (RpcRecHitTwinMuxSector->at(iRpc)  == getXY<int>(DTextrapolatedOnRPCSector,dtsegment_index[0],iOnRpc))  &&
+	   	 (RpcRecHitTwinMuxRing->at(iRpc)    == getXY<int>(DTextrapolatedOnRPCRing,dtsegment_index[0],iOnRpc))    &&
+	   	 (RpcRecHitTwinMuxLayer->at(iRpc)   == getXY<int>(DTextrapolatedOnRPCLayer,dtsegment_index[0],iOnRpc)) ) {
+		
+	   	Float_t dXInner  = abs(getXY<float>(DTextrapolatedOnRPCLocX,dtsegment_index[0],iOnRpc) - RpcRechitTwinMuxLocX->at(iRpc));
+		
+	   	if(dXInner < minDxMB1[1]) {
+	   	  minDxMB1[1] = dXInner;
+	   	  rpcCluSizeMB1[1] = RpcRecHitTwinMuxClusterSize->at(iRpc);
+	   	}
+	      }
+	    }
+	    
+	    h_dX_MB1_layer_2->Fill(minDxMB1[1]);
+	    
 	  }
 	  
 	}
@@ -485,15 +527,55 @@ void combined_trigger_studies::Loop()
 	for(Int_t iOnRpc = 0; iOnRpc < NDTsegmentonRPC->at(dtsegment_index[1]); ++iOnRpc) {
 	  
 	  if(getXY<int>(DTextrapolatedOnRPCLayer,dtsegment_index[1],iOnRpc) == 1) { // inner ring
-
-	    // ...
+	    
+	    has_dt_extrapolation_MB2[0] = true;
+	    
+	    stripWidthMB2[0] = getXY<float>(DTextrapolatedOnRPCStripw,dtsegment_index[1],iOnRpc);
+	    
+	    for(int iRpc = 0; iRpc < NirpcrechitsTwinMux; ++iRpc) {
+	      
+	      if((RpcRecHitTwinMuxStation->at(iRpc) == getXY<int>(DTextrapolatedOnRPCStation,dtsegment_index[1],iOnRpc)) &&
+		 (RpcRecHitTwinMuxSector->at(iRpc)  == getXY<int>(DTextrapolatedOnRPCSector,dtsegment_index[1],iOnRpc))  &&
+		 (RpcRecHitTwinMuxRing->at(iRpc)    == getXY<int>(DTextrapolatedOnRPCRing,dtsegment_index[1],iOnRpc))    &&
+		 (RpcRecHitTwinMuxLayer->at(iRpc)   == getXY<int>(DTextrapolatedOnRPCLayer,dtsegment_index[1],iOnRpc)) ) {
+		
+		Float_t dXInner  = abs(getXY<float>(DTextrapolatedOnRPCLocX,dtsegment_index[1],iOnRpc) - RpcRechitTwinMuxLocX->at(iRpc));
+		
+		if(dXInner < minDxMB2[0]) {
+		  minDxMB2[0] = dXInner;
+		  rpcCluSizeMB2[0] = RpcRecHitTwinMuxClusterSize->at(iRpc);
+		}
+	      }
+	    }
+	    
+	    h_dX_MB2_layer_1->Fill(minDxMB2[0]);
 	  
 	  }
 	
 	  if(getXY<int>(DTextrapolatedOnRPCLayer,dtsegment_index[1],iOnRpc) == 2) { // outer ring
-	  
-	    // ...
-	    	    
+	    
+	    has_dt_extrapolation_MB2[1] = true;
+	    
+	    stripWidthMB2[1] = getXY<float>(DTextrapolatedOnRPCStripw,dtsegment_index[1],iOnRpc);
+	    
+	    for(int iRpc = 0; iRpc < NirpcrechitsTwinMux; ++iRpc) {
+	      
+	      if((RpcRecHitTwinMuxStation->at(iRpc) == getXY<int>(DTextrapolatedOnRPCStation,dtsegment_index[1],iOnRpc)) &&
+		 (RpcRecHitTwinMuxSector->at(iRpc)  == getXY<int>(DTextrapolatedOnRPCSector,dtsegment_index[1],iOnRpc))  &&
+		 (RpcRecHitTwinMuxRing->at(iRpc)    == getXY<int>(DTextrapolatedOnRPCRing,dtsegment_index[1],iOnRpc))    &&
+		 (RpcRecHitTwinMuxLayer->at(iRpc)   == getXY<int>(DTextrapolatedOnRPCLayer,dtsegment_index[1],iOnRpc)) ) {
+		
+		Float_t dXInner  = abs(getXY<float>(DTextrapolatedOnRPCLocX,dtsegment_index[1],iOnRpc) - RpcRechitTwinMuxLocX->at(iRpc));
+		
+		if(dXInner < minDxMB2[1]) {
+		  minDxMB2[1] = dXInner;
+		  rpcCluSizeMB2[1] = RpcRecHitTwinMuxClusterSize->at(iRpc);
+		}
+	      }
+	    }
+	    
+	    h_dX_MB2_layer_2->Fill(minDxMB2[1]);
+	    
 	  }	  
 	}
       }
@@ -507,11 +589,11 @@ void combined_trigger_studies::Loop()
       // ************************************      
       
       // RPC matching cuts
-      Float_t cluster_size_cut = 99.; // you need to tune it as part of the exercise
+      Float_t cluster_size_cut = 3.;
       Float_t range_strips = 4.;
 
       if (has_dt_extrapolation_MB1[0] && has_dt_extrapolation_MB1[1] ) {
-	
+
 	// ...
 
       }
@@ -521,9 +603,8 @@ void combined_trigger_studies::Loop()
 	// ...
 
       }
-      
-      // ...
 
+      // ...
       
       // ************************************
       // 2nd part step3:
@@ -581,6 +662,7 @@ void combined_trigger_studies::Loop()
   outputFile->Close();
 
 }
+
 
 vector<std::pair<Int_t,Int_t>> combined_trigger_studies::TnPSelection(Float_t minMass,
 							 Float_t maxMass)

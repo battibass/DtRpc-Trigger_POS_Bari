@@ -105,10 +105,10 @@ void plotter()
   TH1F *h_dPhi_seg_TrigIn_MB1 = (TH1F*)gDirectory->Get("/distance/h_dPhi_seg_TrigIn_MB1");
   TH1F *h_dPhi_seg_TrigIn_MB2 = (TH1F*)gDirectory->Get("/distance/h_dPhi_seg_TrigIn_MB2");
   
-  // TH1F *h_dX_MB1_layer_1 = (TH1F*)gDirectory->Get("/distance/h_dX_MB1_layer_1");
-  // TH1F *h_dX_MB1_layer_2 = (TH1F*)gDirectory->Get("/distance/h_dX_MB1_layer_2");
-  // TH1F *h_dX_MB2_layer_1 = (TH1F*)gDirectory->Get("/distance/h_dX_MB2_layer_1");
-  // TH1F *h_dX_MB2_layer_2 = (TH1F*)gDirectory->Get("/distance/h_dX_MB2_layer_2");
+  TH1F *h_dX_MB1_layer_1 = (TH1F*)gDirectory->Get("/distance/h_dX_MB1_layer_1");
+  TH1F *h_dX_MB1_layer_2 = (TH1F*)gDirectory->Get("/distance/h_dX_MB1_layer_2");
+  TH1F *h_dX_MB2_layer_1 = (TH1F*)gDirectory->Get("/distance/h_dX_MB2_layer_1");
+  TH1F *h_dX_MB2_layer_2 = (TH1F*)gDirectory->Get("/distance/h_dX_MB2_layer_2");
   
   // From efficiency folder
   
@@ -197,14 +197,14 @@ void plotter()
   dPhi_seg_TrigIn->SetLogy();
   dPhi_seg_TrigIn->Update();
 
-  // TCanvas *dX_MB1_layer_1 = new TCanvas("#DeltaX extrapolation - recHit: MB1, layer 1", "#DeltaX extrapolation - recHit: MB1, layer 1", 210,45,750,500);
-  // h_dX_MB1_layer_1->Draw();
-  // TCanvas *dX_MB1_layer_2 = new TCanvas("#DeltaX extrapolation - recHit: MB1, layer 2", "#DeltaX extrapolation - recHit: MB1, layer 2", 210,45,750,500);
-  // h_dX_MB1_layer_2->Draw();
-  // TCanvas *dX_MB2_layer_1 = new TCanvas("#DeltaX extrapolation - recHit: MB2, layer 1", "#DeltaX extrapolation - recHit: MB2, layer 1", 210,45,750,500);
-  // h_dX_MB2_layer_1->Draw();
-  // TCanvas *dX_MB2_layer_2 = new TCanvas("#DeltaX extrapolation - recHit: MB2, layer 2", "#DeltaX extrapolation - recHit: MB2, layer 2", 210,45,750,500);
-  // h_dX_MB2_layer_2->Draw();
+  TCanvas *dX_MB1_layer_1 = new TCanvas("#DeltaX extrapolation - recHit: MB1, layer 1", "#DeltaX extrapolation - recHit: MB1, layer 1", 210,45,750,500);
+  h_dX_MB1_layer_1->Draw();
+  TCanvas *dX_MB1_layer_2 = new TCanvas("#DeltaX extrapolation - recHit: MB1, layer 2", "#DeltaX extrapolation - recHit: MB1, layer 2", 210,45,750,500);
+  h_dX_MB1_layer_2->Draw();
+  TCanvas *dX_MB2_layer_1 = new TCanvas("#DeltaX extrapolation - recHit: MB2, layer 1", "#DeltaX extrapolation - recHit: MB2, layer 1", 210,45,750,500);
+  h_dX_MB2_layer_1->Draw();
+  TCanvas *dX_MB2_layer_2 = new TCanvas("#DeltaX extrapolation - recHit: MB2, layer 2", "#DeltaX extrapolation - recHit: MB2, layer 2", 210,45,750,500);
+  h_dX_MB2_layer_2->Draw();
     
   // compareEfficiencies("RPC eff vs p_{T}", h_eff_rpc_pt_MB1, h_eff_rpc_pt_MB2, "MB1", "MB2");    
   // compareEfficiencies("RPC eff vs #eta", h_eff_rpc_eta_MB1, h_eff_rpc_eta_MB2, "MB1", "MB2");    
